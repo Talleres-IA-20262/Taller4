@@ -32,6 +32,37 @@ def build_rules():
       objetos Atom como premisas y un Atom como conclusión. La tupla representa
       la conjunción; las variables de la regla se interpretan universalmente.
     """
-    # TODO: Add your code here
-    raise NotImplementedError
-    # FIN DEL BLOQUE DEL ESTUDIANTE
+    return (
+        Rule('R1', 'Competencia del técnico', (
+            atom('Asignado', '?t', '?p'),
+            atom('Requiere', '?t', '?e'),
+            atom('Habilitado', '?p', '?e'),
+        ), atom('Competente', '?p', '?t')),
+
+        Rule('R2', 'Preparación de la tarea', (
+            atom('EnZona', '?t', '?z'),
+            atom('AislamientoConfirmado', '?z', '?f'),
+            atom('SinAlertaConfirmada', '?z', '?f'),
+        ), atom('Preparada', '?t', '?f')),
+
+        Rule('R3', 'Autorización de la tarea', (
+            atom('Programada', '?t', '?f'),
+            atom('Asignado', '?t', '?p'),
+            atom('Disponible', '?p', '?f'),
+            atom('Competente', '?p', '?t'),
+            atom('Preparada', '?t', '?f'),
+        ), atom('Autorizada', '?t', '?f')),
+
+        Rule('R4', 'Bloqueo por alerta', (
+            atom('Programada', '?t', '?f'),
+            atom('EnZona', '?t', '?z'),
+            atom('Alerta', '?z', '?f'),
+        ), atom('Bloqueada', '?t', '?f')),
+
+        Rule('R5', 'Bloqueo por aislamiento fallido', (
+            atom('Programada', '?t', '?f'),
+            atom('EnZona', '?t', '?z'),
+            atom('AislamientoFallido', '?z', '?f'),
+        ), atom('Bloqueada', '?t', '?f')),
+    )
+
